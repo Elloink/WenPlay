@@ -2,6 +2,7 @@ package com.example.wen.wenplay.di.module;
 
 import android.app.Application;
 
+import com.example.wen.wenplay.common.rx.subscriber.ErrorHandler;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
@@ -34,4 +35,5 @@ public class AppModule {
     public Gson provideGson(){
         return new Gson();
     }
+
 }

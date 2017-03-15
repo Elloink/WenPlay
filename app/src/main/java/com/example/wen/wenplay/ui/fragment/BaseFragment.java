@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.wen.wenplay.AppApplication;
 import com.example.wen.wenplay.di.component.AppComponent;
 import com.example.wen.wenplay.presenter.BasePresenter;
+import com.example.wen.wenplay.ui.BaseView;
 
 import javax.inject.Inject;
 
@@ -20,7 +21,7 @@ import butterknife.Unbinder;
  * Created by wen on 2017/2/28.
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
     private Unbinder mUnBinder;
     private View mRootView;
@@ -46,6 +47,18 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
         init();
 
+    }
+
+    @Override
+    public void showLoading() {
+    }
+
+    @Override
+    public void showError(String msg) {
+    }
+
+    @Override
+    public void dismissLoading() {
     }
 
     public abstract int setLayoutId();

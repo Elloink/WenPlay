@@ -1,9 +1,14 @@
 package com.example.wen.wenplay.data;
 
+import android.util.Log;
+
 import com.example.wen.wenplay.bean.AppInfo;
+import com.example.wen.wenplay.bean.BaseBean;
+import com.example.wen.wenplay.bean.IndexBean;
 import com.example.wen.wenplay.bean.PageBean;
 import com.example.wen.wenplay.data.http.ApiService;
-import retrofit2.Callback;
+
+import io.reactivex.Observable;
 
 
 /**
@@ -20,14 +25,20 @@ public class RecommendModel {
     }
 
     //PageBean<AppInfo>
-    public void getApps(Callback<PageBean<AppInfo>> callback){
+    public Observable<BaseBean<PageBean<AppInfo>>> getApps(){
 
      /*   HttpManager httpManager = new HttpManager();
 
         ApiService apiService = httpManager.getRetrofit(httpManager.getOkHttpClient()).create(ApiService.class);*/
 
-        mApiService.getApps("{page:0}").enqueue(callback);
+        Log.d("RecommendModel",mApiService.getApps("{page:0}").toString());
+        return mApiService.getApps("{page:0}");
 
     }
+
+    public Observable<BaseBean<IndexBean>> index(){
+        return mApiService.index();
+    }
+
 
 }

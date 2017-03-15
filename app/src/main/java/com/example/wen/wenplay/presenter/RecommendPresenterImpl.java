@@ -1,17 +1,29 @@
 package com.example.wen.wenplay.presenter;
 
+
+import android.Manifest;
+import android.app.Activity;
+import android.widget.Toast;
+
 import com.example.wen.wenplay.bean.AppInfo;
+import com.example.wen.wenplay.bean.IndexBean;
 import com.example.wen.wenplay.bean.PageBean;
+import com.example.wen.wenplay.common.rx.RxHttpResponseCompat;
+import com.example.wen.wenplay.common.rx.subscriber.ErrorHandler;
+import com.example.wen.wenplay.common.rx.subscriber.ProgressDialogSubscriber;
+import com.example.wen.wenplay.common.rx.subscriber.SweetProgressDialogSubscriber;
 import com.example.wen.wenplay.data.RecommendModel;
 import com.example.wen.wenplay.presenter.contract.RecommendContract;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tbruyelle.rxpermissions2.RxPermissionsFragment;
+
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.functions.Consumer;
+
 
 /**
  * RecommendPresenter 的具体实现
@@ -19,42 +31,43 @@ import retrofit2.Response;
  * Created by wen on 2017/2/28.
  */
 
-public class RecommendPresenterImpl extends BasePresenter<RecommendModel,RecommendContract.RecommendView> {
+public class RecommendPresenterImpl extends BasePresenter<RecommendModel, RecommendContract.RecommendView> {
+
 
     //需要的参数dagger会到Module里面找
     @Inject
-    public RecommendPresenterImpl(RecommendModel recommendModel,RecommendContract.RecommendView recommendView) {
-       super(recommendModel,recommendView);
-
+    public RecommendPresenterImpl(RecommendModel recommendModel, RecommendContract.RecommendView recommendView) {
+        super(recommendModel, recommendView);
     }
 
     public void initDatas() {
-        //获取到数据前提示Loading
-        mView.showLoading();
-        mModel.getApps(new Callback<PageBean<AppInfo>>() {
+       // getIndexBean();
+        RxPermissions rxPermissions = new RxPermissions((Activity) mContext);
+        rxPermissions.request(Manifest.permission.READ_PHONE_STATE).subscribe(new Consumer<Boolean>() {
             @Override
-            public void onResponse(Call<PageBean<AppInfo>> call, Response<PageBean<AppInfo>> response) {
-
-                if (response != null){
-                    //展示数据
-                    PageBean<AppInfo> pageBean = response.body();
-                    List<AppInfo> appInfoList = pageBean.getDatas();
-                    mView.showResult(appInfoList);
+            public void accept(Boolean aBoolean) throws Exception {
+                if (aBoolean){
+                    getIndexBean();
                 }else {
-                    //提示没有数据
-                    mView.showNoData();
+                    Toast.makeText(mContext,"你已拒绝授权",Toast.LENGTH_SHORT).show();
                 }
-               //隐藏Loading
-                mView.dismissLoading();
-            }
-
-
-            @Override
-            public void onFailure(Call<PageBean<AppInfo>> call, Throwable t) {
-                //失败，隐藏Loading并提示错误
-                mView.dismissLoading();
-                mView.showError(t.getMessage());
             }
         });
+
     }
+
+
+    public void getIndexBean(){
+        mModel.index().compose(RxHttpResponseCompat.<IndexBean>compatResult())
+                .subscribe(new SweetProgressDialogSubscriber<IndexBean>(mContext,mView) {
+                    @Override
+                    public void onNext(IndexBean indexBean) {
+                        if (indexBean != null) {
+                            //展示数据
+                            mView.showResult(indexBean);
+                        }
+                    }
+                });
+    }
+
 }

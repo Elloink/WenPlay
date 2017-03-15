@@ -2,6 +2,7 @@ package com.example.wen.wenplay.di.module;
 
 import android.app.ProgressDialog;
 
+import com.example.wen.wenplay.common.rx.subscriber.ErrorHandler;
 import com.example.wen.wenplay.data.RecommendModel;
 import com.example.wen.wenplay.data.http.ApiService;
 import com.example.wen.wenplay.presenter.RecommendPresenterImpl;
@@ -26,7 +27,7 @@ public class RecommendModule {
 
     //需要的参数会从provides方法中找
     @Provides
-   public RecommendPresenterImpl provideRecommendPresenterImpl(RecommendModel recommendModel,RecommendContract.RecommendView recommendView){
+   public RecommendPresenterImpl provideRecommendPresenterImpl(RecommendModel recommendModel, RecommendContract.RecommendView recommendView){
         return new RecommendPresenterImpl(recommendModel,recommendView);
     }
 
@@ -44,6 +45,8 @@ public class RecommendModule {
 
     @Provides
     public ProgressDialog provideProgressDialog(RecommendContract.RecommendView recommendView){
-        return new ProgressDialog(((RecommendFragment)recommendView).getActivity());
+        ProgressDialog progressDialog = new ProgressDialog(((RecommendFragment)recommendView).getActivity());
+        progressDialog.setMessage("Loading...");
+        return progressDialog;
     }
 }

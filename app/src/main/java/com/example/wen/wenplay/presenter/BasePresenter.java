@@ -1,5 +1,9 @@
 package com.example.wen.wenplay.presenter;
 
+import android.app.Activity;
+import android.content.Context;
+import android.support.v4.app.Fragment;
+
 import com.example.wen.wenplay.ui.BaseView;
 
 /**
@@ -11,6 +15,8 @@ public class BasePresenter<M,V extends BaseView> {
     protected M mModel;
     protected V mView;
 
+    protected Context mContext;
+
     /**
      * @param model Presenter中使用的model
      * @param view Presenter中使用的view
@@ -18,5 +24,13 @@ public class BasePresenter<M,V extends BaseView> {
     public BasePresenter(M model, V view) {
         mModel = model;
         mView = view;
+
+        if(mView instanceof Fragment){
+            mContext =((Fragment) mView).getActivity();
+        }else {
+            mContext = (Activity) mView;
+        }
     }
+
+
 }

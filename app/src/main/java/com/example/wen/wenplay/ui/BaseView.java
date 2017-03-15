@@ -7,5 +7,6 @@ package com.example.wen.wenplay.ui;
 
 public interface BaseView {
     void showLoading(); //获取到数据前提示Loading
+    void showError(String msg);
     void dismissLoading(); //获取数据完成或出错隐藏Loading
 }

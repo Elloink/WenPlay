@@ -1,6 +1,9 @@
 package com.example.wen.wenplay.di.component;
 
+import android.app.Application;
+
 import com.example.wen.wenplay.AppApplication;
+import com.example.wen.wenplay.common.rx.subscriber.ErrorHandler;
 import com.example.wen.wenplay.data.http.ApiService;
 import com.example.wen.wenplay.di.module.AppModule;
 import com.example.wen.wenplay.di.module.HttpModule;
@@ -19,5 +22,8 @@ public interface AppComponent {
 
     //提供一个方法获取ApiService，会到相应的HttpModule寻找
     public ApiService getApiService();
+
+    public Application getApplication();
+
 
 }
