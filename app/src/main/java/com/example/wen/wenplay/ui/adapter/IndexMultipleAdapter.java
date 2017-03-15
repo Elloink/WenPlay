@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wen.wenplay.R;
 import com.example.wen.wenplay.bean.Banner;
@@ -109,17 +108,17 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else {
             AppViewHolder viewHolder = (AppViewHolder) holder;
 
-            HotAppInfoAdapter hotAppInfoAdapter = new HotAppInfoAdapter(R.layout.item_appinfo);
+            AppInfoAdapter appInfoAdapter = AppInfoAdapter.Builder().showCategoryName(false).showPosition(false).showBrief(true).build();
 
             if (viewHolder.type == TYPE_APPS) {
                 viewHolder.mText.setText("热门应用");
-                hotAppInfoAdapter.addData(mIndexBean.getRecommendApps());
+                appInfoAdapter.addData(mIndexBean.getRecommendApps());
             } else if (viewHolder.type == TYPE_GAMES) {
                 viewHolder.mText.setText("热门游戏");
-                hotAppInfoAdapter.addData(mIndexBean.getRecommendGames());
+                appInfoAdapter.addData(mIndexBean.getRecommendGames());
             }
 
-            viewHolder.mRecyclerView.setAdapter(hotAppInfoAdapter);
+            viewHolder.mRecyclerView.setAdapter(appInfoAdapter);
             int i = mIndexBean.getRecommendApps().size() + mIndexBean.getRecommendGames().size();
         }
     }

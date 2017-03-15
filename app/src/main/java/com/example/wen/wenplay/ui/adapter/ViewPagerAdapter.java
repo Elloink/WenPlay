@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.wen.wenplay.ui.bean.FragmentInfo;
+import com.example.wen.wenplay.ui.fragment.TopListFragment;
 import com.example.wen.wenplay.ui.fragment.CategoryFragment;
 import com.example.wen.wenplay.ui.fragment.GamesFragment;
-import com.example.wen.wenplay.ui.fragment.RankingFragment;
 import com.example.wen.wenplay.ui.fragment.RecommendFragment;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private void initFragment() {
         mFragmentInfoList.add(new FragmentInfo("推荐", RecommendFragment.class));
-        mFragmentInfoList.add(new FragmentInfo("排行", RankingFragment.class));
+        mFragmentInfoList.add(new FragmentInfo("排行", TopListFragment.class));
         mFragmentInfoList.add(new FragmentInfo("游戏", GamesFragment.class));
         mFragmentInfoList.add(new FragmentInfo("分类", CategoryFragment.class));
     }

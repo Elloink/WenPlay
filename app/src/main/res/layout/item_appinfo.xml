@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
-        android:textSize="18dp"
+        android:textSize="18sp"
         style="@style/Text_Title"
         android:text="1."/>
 
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 style="@style/Text_Title"
                 android:text="微信"
                 />
@@ -63,7 +63,7 @@
                       android:layout_alignParentRight="true"
                       android:textColor="@color/md_grey_400"
                       android:text="{ion-ios-download}"
-                      android:textSize="40dp"
+                      android:textSize="40sp"
 
 
                 />
@@ -81,7 +81,6 @@
             />
 
 
-
         <TextView
             android:id="@+id/txt_brief"
             android:layout_width="wrap_content"
@@ -89,8 +88,6 @@
             android:text="社交"
             style="@style/Text_Content"
             />
-
-
 
 
     </LinearLayout>

@@ -12,15 +12,15 @@ import io.reactivex.Observable;
 
 
 /**
- * RecommendModel 负责获取RecommendFragment需要的数据
+ * AppInfoModel 负责获取RecommendFragment需要的数据
  * Created by wen on 2017/2/28.
  */
 
-public class RecommendModel {
+public class AppInfoModel {
 
     private ApiService mApiService;
 
-    public RecommendModel(ApiService apiService){
+    public AppInfoModel(ApiService apiService){
         this.mApiService = apiService;
     }
 
@@ -31,7 +31,7 @@ public class RecommendModel {
 
         ApiService apiService = httpManager.getRetrofit(httpManager.getOkHttpClient()).create(ApiService.class);*/
 
-        Log.d("RecommendModel",mApiService.getApps("{page:0}").toString());
+        Log.d("AppInfoModel",mApiService.getApps("{page:0}").toString());
         return mApiService.getApps("{page:0}");
 
     }
@@ -40,5 +40,12 @@ public class RecommendModel {
         return mApiService.index();
     }
 
+    public Observable<BaseBean<PageBean<AppInfo>>> topList(int page){
+        return mApiService.topList(page);
+    }
+
+    public Observable<BaseBean<PageBean<AppInfo>>> games(int page){
+        return mApiService.games(page);
+    }
 
 }

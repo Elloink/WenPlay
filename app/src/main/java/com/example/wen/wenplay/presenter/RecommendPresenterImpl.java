@@ -5,20 +5,13 @@ import android.Manifest;
 import android.app.Activity;
 import android.widget.Toast;
 
-import com.example.wen.wenplay.bean.AppInfo;
 import com.example.wen.wenplay.bean.IndexBean;
-import com.example.wen.wenplay.bean.PageBean;
 import com.example.wen.wenplay.common.rx.RxHttpResponseCompat;
-import com.example.wen.wenplay.common.rx.subscriber.ErrorHandler;
-import com.example.wen.wenplay.common.rx.subscriber.ProgressDialogSubscriber;
 import com.example.wen.wenplay.common.rx.subscriber.SweetProgressDialogSubscriber;
-import com.example.wen.wenplay.data.RecommendModel;
-import com.example.wen.wenplay.presenter.contract.RecommendContract;
+import com.example.wen.wenplay.data.AppInfoModel;
+import com.example.wen.wenplay.presenter.contract.AppInfoContract;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tbruyelle.rxpermissions2.RxPermissionsFragment;
 
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -31,13 +24,13 @@ import io.reactivex.functions.Consumer;
  * Created by wen on 2017/2/28.
  */
 
-public class RecommendPresenterImpl extends BasePresenter<RecommendModel, RecommendContract.RecommendView> {
+public class RecommendPresenterImpl extends BasePresenter<AppInfoModel, AppInfoContract.RecommendView> {
 
 
     //需要的参数dagger会到Module里面找
     @Inject
-    public RecommendPresenterImpl(RecommendModel recommendModel, RecommendContract.RecommendView recommendView) {
-        super(recommendModel, recommendView);
+    public RecommendPresenterImpl(AppInfoModel appInfoModel, AppInfoContract.RecommendView recommendView) {
+        super(appInfoModel, recommendView);
     }
 
     public void initDatas() {

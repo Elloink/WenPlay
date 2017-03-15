@@ -4,21 +4,16 @@ import android.app.ProgressDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.wen.wenplay.R;
-import com.example.wen.wenplay.bean.AppInfo;
 import com.example.wen.wenplay.bean.IndexBean;
 import com.example.wen.wenplay.di.component.AppComponent;
 import com.example.wen.wenplay.di.component.DaggerRecommendComponent;
 import com.example.wen.wenplay.di.module.RecommendModule;
 import com.example.wen.wenplay.presenter.RecommendPresenterImpl;
-import com.example.wen.wenplay.presenter.contract.RecommendContract;
+import com.example.wen.wenplay.presenter.contract.AppInfoContract;
 import com.example.wen.wenplay.ui.adapter.IndexMultipleAdapter;
-import com.example.wen.wenplay.ui.adapter.RecommendAdapter;
-import com.example.wen.wenplay.ui.decoration.DividerItemDecoration;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,7 +25,7 @@ import butterknife.BindView;
  * Created by wen on 2017/2/27.
  */
 
-public class RecommendFragment extends ProgressFragment<RecommendPresenterImpl> implements RecommendContract.RecommendView{
+public class RecommendFragment extends ProgressFragment<RecommendPresenterImpl> implements AppInfoContract.RecommendView{
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -41,7 +36,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenterImpl> 
 
     @Override
     public int setLayoutId() {
-        return R.layout.fragment_recommend;
+        return R.layout.template_recycler_view;
     }
 
     @Override
