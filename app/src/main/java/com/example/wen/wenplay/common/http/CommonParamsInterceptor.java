@@ -1,8 +1,10 @@
 package com.example.wen.wenplay.common.http;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.example.wen.wenplay.common.Constant;
+import com.example.wen.wenplay.common.util.ACache;
 import com.example.wen.wenplay.common.util.DensityUtil;
 import com.example.wen.wenplay.common.util.DeviceUtils;
 import com.google.gson.Gson;
@@ -55,6 +57,12 @@ public class CommonParamsInterceptor implements Interceptor {
             commonParamsMap.put(Constant.SDK,DeviceUtils.getBuildVersionSDK()+"");
             commonParamsMap.put(Constant.DENSITY_SCALE_FACTOR,mContext.getResources().getDisplayMetrics().density+"");
 
+            //添加Token
+            String token = ACache.get(mContext).getAsString(Constant.TOKEN);
+            commonParamsMap.put(Constant.TOKEN,token == null ?"":token);
+
+
+
             if (method.equals("GET")){
 
                 HttpUrl httpUrl =  request.url();
@@ -105,7 +113,6 @@ public class CommonParamsInterceptor implements Interceptor {
 
                 RequestBody body = request.body();
 
-
                 HashMap<String,Object> rootMap = new HashMap<>();
                 if(body instanceof FormBody){ // form 表单
 
@@ -123,12 +130,17 @@ public class CommonParamsInterceptor implements Interceptor {
 
                     String oldJsonParams =  buffer.readUtf8(); //将流重新转换成json字符串
 
-                    rootMap = mGson.fromJson(oldJsonParams,HashMap.class); // 原始参数
-                    rootMap.put("publicParams",commonParamsMap); // 重新组装
-                    String newJsonParams = mGson.toJson(rootMap); // {"page":0,"publicParams":{"imei":'xxxxx',"sdk":14,.....}}
+                    if ( !TextUtils.isEmpty(oldJsonParams)){
+                        rootMap = mGson.fromJson(oldJsonParams,HashMap.class); // 原始参数
+                        if (rootMap != null){
+                            rootMap.put("publicParams",commonParamsMap); // 重新组装
+                            String newJsonParams = mGson.toJson(rootMap); // {"page":0,"publicParams":{"imei":'xxxxx',"sdk":14,.....}}
+
+                            request = request.newBuilder().post(RequestBody.create(JSON, newJsonParams)).build();
+                        }
+                    }
 
 
-                    request = request.newBuilder().post(RequestBody.create(JSON, newJsonParams)).build();
 
 
                 }

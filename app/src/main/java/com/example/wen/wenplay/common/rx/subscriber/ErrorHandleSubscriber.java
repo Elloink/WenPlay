@@ -1,8 +1,10 @@
 package com.example.wen.wenplay.common.rx.subscriber;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.example.wen.wenplay.common.exception.BaseException;
+import com.example.wen.wenplay.ui.activity.LoginActivity;
 
 /**
  * 封装错误处理的Subscriber
@@ -24,11 +26,27 @@ public abstract class ErrorHandleSubscriber<T> extends DefaultSubscriber<T> {
     @Override
     public void onError(Throwable e) {
 
-        e.printStackTrace();
+
 
         BaseException baseException = mErrorHandler.handleError(e);
 
-        mErrorHandler.showErrorMessage(baseException);
+        if (baseException == null){
+            e.printStackTrace();
+        }else {
+            mErrorHandler.showErrorMessage(baseException);
+            if (BaseException.ERROR_TOKEN == baseException.getCode()){
+                toLogin();
+            }
+
+        }
+
+
 
     }
+
+    private void toLogin() {
+        mContext.startActivity(new Intent(mContext, LoginActivity.class));
+    }
+
+
 }

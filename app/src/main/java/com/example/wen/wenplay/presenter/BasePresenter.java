@@ -17,10 +17,7 @@ public class BasePresenter<M,V extends BaseView> {
 
     protected Context mContext;
 
-    /**
-     * @param model Presenter中使用的model
-     * @param view Presenter中使用的view
-     */
+
     public BasePresenter(M model, V view) {
         mModel = model;
         mView = view;

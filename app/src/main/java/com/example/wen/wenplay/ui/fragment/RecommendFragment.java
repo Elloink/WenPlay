@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.wen.wenplay.R;
 import com.example.wen.wenplay.bean.IndexBean;
 import com.example.wen.wenplay.di.component.AppComponent;
+;
 import com.example.wen.wenplay.di.component.DaggerRecommendComponent;
 import com.example.wen.wenplay.di.module.RecommendModule;
 import com.example.wen.wenplay.presenter.RecommendPresenterImpl;
@@ -18,6 +19,7 @@ import com.example.wen.wenplay.ui.adapter.IndexMultipleAdapter;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import zlc.season.rxdownload2.RxDownload;
 
 
 /**
@@ -33,6 +35,9 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenterImpl> 
     //@Inject 告诉dagger ProgressDialog 需要dagger实例化，根据component关联，到相应的Module中的provides方法中得到实例化对象
     @Inject
      ProgressDialog mProgressDialog;
+
+    @Inject
+    RxDownload mRxDownload;
 
     @Override
     public int setLayoutId() {
@@ -64,19 +69,23 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenterImpl> 
 
     private void initRecyclerView(IndexBean data) {
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (mRecyclerView != null) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
      /*   //为RecyclerView设置分割线
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL_LIST));*/
 
-        //动画
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            //动画
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        IndexMultipleAdapter adapter = new IndexMultipleAdapter(getActivity());
+            IndexMultipleAdapter adapter = new IndexMultipleAdapter(getActivity(),mRxDownload,mAppApplication);
 
-        adapter.setData(data);
+            adapter.setData(data);
 
-        mRecyclerView.setAdapter(adapter);
+            mRecyclerView.setAdapter(adapter);
+
+
+        }
     }
 
     @Override
@@ -90,21 +99,5 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenterImpl> 
         Toast.makeText(getActivity(),"服务器开小差了：",Toast.LENGTH_SHORT).show();
     }
 
-    /*    @Override
-    public void showError(String msg) {
-        Log.d("RecommendFragment",msg);
-        Toast.makeText(getActivity(),"服务器开小差了："+msg,Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public void showLoading() {
-        if (mProgressDialog != null && !mProgressDialog.isShowing())
-        mProgressDialog.show();
-    }
-
-    @Override
-    public void dismissLoading() {
-        if (mProgressDialog!=null && mProgressDialog.isShowing())
-        mProgressDialog.dismiss();
-    }*/
 }

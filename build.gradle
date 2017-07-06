@@ -6,7 +6,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.2.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8' //添加apt命令
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -24,3 +24,5 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+apply from : "config.gradle" //表明app build.gradle的配置从 config.gradle文件中引用

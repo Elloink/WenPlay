@@ -7,11 +7,12 @@
     android:title="@string/menu_action_search"
     app:showAsAction="ifRoom"/>
 
-  <!--  <item
-        android:id="@+id/action_update"
-        android:icon="@mipmap/ic_search"
-        android:title="@string/menu_action_search"
-        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_download_manager"
+        android:title="@string/menu_action_download_manager"
+        app:showAsAction="ifRoom"
+        app:actionProviderClass="com.example.wen.wenplay.ui.widget.ToolbarActionProvider"/>
+  <!--
     <item
         android:id="@+id/action_navigation"
         android:icon="@mipmap/ic_search"

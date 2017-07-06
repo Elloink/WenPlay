@@ -34,7 +34,7 @@ public class RecommendPresenterImpl extends BasePresenter<AppInfoModel, AppInfoC
     }
 
     public void initDatas() {
-       // getIndexBean();
+     /*
         RxPermissions rxPermissions = new RxPermissions((Activity) mContext);
         rxPermissions.request(Manifest.permission.READ_PHONE_STATE).subscribe(new Consumer<Boolean>() {
             @Override
@@ -45,8 +45,9 @@ public class RecommendPresenterImpl extends BasePresenter<AppInfoModel, AppInfoC
                     Toast.makeText(mContext,"你已拒绝授权",Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
 
+        getIndexBean();
     }
 
 

@@ -1,0 +1,47 @@
+ext{
+
+    android=[
+
+            compileSdkVersion:24,
+            buildToolsVersion:"24.0.2",
+            minSdkVersion:16,
+            targetSdkVersion:24,
+
+
+            androidSupportSDKVersion:       "24.2.1",
+            retrofitVersion:                "2.2.0",
+            okhttpVersion:                  "3.6.0",
+            butterknifeVersion:             "8.5.1",
+            rxJavaVersion:                  "2.0.7",
+            rxAndroidVersion:               "2.0.1",
+            rxBindingVersion:               "2.0.0"
+
+
+
+    ]
+
+    dependencies=[
+
+            "appcompat-v7" :                  "com.android.support:appcompat-v7:${android["androidSupportSDKVersion"]}",
+            "design" :                        "com.android.support:design:${android[ "androidSupportSDKVersion"]}",
+
+            "retrofit":                        "com.squareup.retrofit2:retrofit:${android[ "retrofitVersion"]}",
+            "retrofit2-rxjava2-adapter":       "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0-RC3",
+            "retrofit2-converter-gson" :       "com.squareup.retrofit2:converter-gson:${android["retrofitVersion"]}",
+
+            "okhttp":                          "com.squareup.okhttp3:okhttp:${android[ "okhttpVersion"]}",
+            "okhttp-logging-interceptor":      "com.squareup.okhttp3:logging-interceptor:${android[ "okhttpVersion"]}",
+
+
+            "butterknife" :                     "com.jakewharton:butterknife:${android["butterknifeVersion"]}",
+            "butterknife-compiler":             "com.jakewharton:butterknife-compiler:${android["butterknifeVersion"]}",
+
+            "rxandroid":                         "io.reactivex.rxjava2:rxandroid:${android[ "rxAndroidVersion"]}",
+            "rxjava":                            "io.reactivex.rxjava2:rxjava:${android[ "rxJavaVersion"]}",
+            "rxbinding":                         "com.jakewharton.rxbinding2:rxbinding:${android[ "rxBindingVersion"]}",
+            "rxbus":                             "com.hwangjr.rxbus:rxbus:2.0.0-beta",
+           // "rxpermissions":                      "com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar"
+            "rxpermissions":                      "com.tbruyelle.rxpermissions2:rxpermissions:0.8.2@aar"
+    ]
+
+}

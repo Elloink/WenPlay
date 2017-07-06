@@ -2,6 +2,7 @@ package com.example.wen.wenplay.di.component;
 
 import com.example.wen.wenplay.di.FragmentScope;
 import com.example.wen.wenplay.di.module.AppInfoModule;
+import com.example.wen.wenplay.ui.fragment.CategoryAppFragment;
 import com.example.wen.wenplay.ui.fragment.GamesFragment;
 import com.example.wen.wenplay.ui.fragment.TopListFragment;
 
@@ -18,5 +19,6 @@ public interface AppInfoComponent {
 
     void injectTopListFragment(TopListFragment topListFragment);
     void injectGamesFragment(GamesFragment gamesFragment);
+    void injectCategoryAppFragment(CategoryAppFragment categoryAppFragment);
 
 }

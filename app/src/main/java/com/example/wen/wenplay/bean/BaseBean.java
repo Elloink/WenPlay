@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by wen on 2017/3/7.
  */
 
-public class BaseBean<T> implements Serializable {
+public class BaseBean<T> extends BaseEntity {
 
 
     public static final int SUCCESS=1;

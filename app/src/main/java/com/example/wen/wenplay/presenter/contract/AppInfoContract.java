@@ -6,6 +6,8 @@ import com.example.wen.wenplay.bean.IndexBean;
 import com.example.wen.wenplay.bean.PageBean;
 import com.example.wen.wenplay.ui.BaseView;
 
+import java.util.List;
+
 
 /**
  * 契约类
@@ -22,6 +24,10 @@ public class AppInfoContract {
     public interface AppInfoView extends BaseView{
         void showResult(PageBean<AppInfo> data);
         void onLoadMoreComplete();
+    }
+
+    public interface AppDetailView extends BaseView{
+        void showResult(AppInfo appInfo);
     }
 
 }

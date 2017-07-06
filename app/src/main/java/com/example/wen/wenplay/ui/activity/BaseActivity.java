@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.wen.wenplay.AppApplication;
 import com.example.wen.wenplay.di.component.AppComponent;
 import com.example.wen.wenplay.presenter.BasePresenter;
+import com.example.wen.wenplay.ui.BaseView;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import javax.inject.Inject;
@@ -19,10 +20,10 @@ import butterknife.Unbinder;
  * Created by wen on 2017/2/28.
  */
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView{
 
     private Unbinder mUnBinder;
-    private AppApplication mAppApplication;
+    protected AppApplication mAppApplication;
 
     @Inject
     T presenterImpl;
@@ -57,5 +58,20 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (mUnBinder != Unbinder.EMPTY){
             mUnBinder.unbind();
         }
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void dismissLoading() {
+
     }
 }

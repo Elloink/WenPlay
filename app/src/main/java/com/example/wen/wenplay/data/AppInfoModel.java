@@ -8,6 +8,8 @@ import com.example.wen.wenplay.bean.IndexBean;
 import com.example.wen.wenplay.bean.PageBean;
 import com.example.wen.wenplay.data.http.ApiService;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 
 
@@ -40,12 +42,38 @@ public class AppInfoModel {
         return mApiService.index();
     }
 
+    //获取排行应用
     public Observable<BaseBean<PageBean<AppInfo>>> topList(int page){
         return mApiService.topList(page);
     }
 
+    //获取游戏应用
     public Observable<BaseBean<PageBean<AppInfo>>> games(int page){
         return mApiService.games(page);
     }
+
+
+    //根据分类获取精品应用
+    public  Observable<BaseBean<PageBean<AppInfo>>> getFeaturedAppByCategory( int categoryid, int page){
+        return mApiService.getFeaturedAppByCategory(categoryid,page);
+    }
+
+    //根据分类获取排行应用
+    public  Observable<BaseBean<PageBean<AppInfo>>> getTopListAppByCategory( int categoryid, int page){
+        return mApiService.getTopListAppByCategory(categoryid,page);
+    }
+
+    //根据分类获取新品应用
+    public  Observable<BaseBean<PageBean<AppInfo>>> getNewListAppByCategory( int categoryid, int page){
+        return mApiService.getNewListAppByCategory(categoryid,page);
+    }
+
+    public Observable<BaseBean<AppInfo>> getAppDetail(int id){
+        return mApiService.getAppDetail(id);
+    }
+
+
+
+
 
 }

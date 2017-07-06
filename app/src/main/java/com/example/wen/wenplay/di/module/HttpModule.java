@@ -2,7 +2,6 @@ package com.example.wen.wenplay.di.module;
 
 import android.app.Application;
 
-import com.example.wen.wenplay.BuildConfig;
 import com.example.wen.wenplay.common.http.CommonParamsInterceptor;
 import com.example.wen.wenplay.common.rx.subscriber.ErrorHandler;
 import com.example.wen.wenplay.data.http.ApiService;
@@ -34,7 +33,7 @@ public class HttpModule {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
 
-        if(BuildConfig.DEBUG){
+     /*   if(BuildConfig.DEBUG){
             // log用拦截器
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
@@ -43,7 +42,7 @@ public class HttpModule {
 
             builder.addInterceptor(logging);
 
-        }
+        }*/
 
         // 如果使用到HTTPS，我们需要创建SSLSocketFactory，并设置到client
 //        SSLSocketFactory sslSocketFactory = null;

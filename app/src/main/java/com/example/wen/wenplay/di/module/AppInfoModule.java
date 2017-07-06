@@ -11,7 +11,7 @@ import dagger.Provides;
 /**
  * Created by wen on 2017/2/28.
  */
-@Module
+@Module(includes = {AppModelModule.class})
 public class AppInfoModule {
 
     private AppInfoContract.AppInfoView mAppInfoView;
@@ -33,10 +33,10 @@ public class AppInfoModule {
         return mAppInfoView;
     }
 
-    @Provides
+  /*  @Provides
     public AppInfoModel provideRecommendModel(ApiService apiService){
         //由于此处参数ApiService 在HttpModule提供，因此需要在RecommendComponent中添加依赖
         return new AppInfoModel(apiService);
-    }
+    }*/
 
 }

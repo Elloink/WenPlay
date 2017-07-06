@@ -1,6 +1,7 @@
 package com.example.wen.wenplay.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,10 +11,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.example.wen.wenplay.AppApplication;
 import com.example.wen.wenplay.R;
+import com.example.wen.wenplay.bean.AppInfo;
 import com.example.wen.wenplay.bean.Banner;
 import com.example.wen.wenplay.bean.IndexBean;
 import com.example.wen.wenplay.common.imageloader.ImageLoader;
+import com.example.wen.wenplay.ui.activity.AppDetailActivity;
+import com.example.wen.wenplay.ui.activity.SubjectActivity;
 import com.example.wen.wenplay.ui.decoration.DividerItemDecoration;
 import com.example.wen.wenplay.ui.widget.BannerLayout;
 
@@ -22,6 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import zlc.season.rxdownload2.RxDownload;
 
 /**
  * Created by wen on 2017/3/14.
@@ -39,10 +47,14 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
     private IndexBean mIndexBean;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
+    private RxDownload mRxDownload;
+    private AppApplication mAppApplication;
 
-    public IndexMultipleAdapter(Context context) {
+    public IndexMultipleAdapter(Context context,RxDownload rxDownload,AppApplication appApplication) {
         mLayoutInflater = LayoutInflater.from(context);
         this.mContext = context;
+        this.mRxDownload = rxDownload;
+        this.mAppApplication = appApplication;
     }
 
     @Override
@@ -108,7 +120,7 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else {
             AppViewHolder viewHolder = (AppViewHolder) holder;
 
-            AppInfoAdapter appInfoAdapter = AppInfoAdapter.Builder().showCategoryName(false).showPosition(false).showBrief(true).build();
+            final AppInfoAdapter appInfoAdapter = AppInfoAdapter.Builder().showCategoryName(false).showPosition(false).showBrief(true).rxDownload(mRxDownload).build();
 
             if (viewHolder.type == TYPE_APPS) {
                 viewHolder.mText.setText("热门应用");
@@ -119,7 +131,18 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
 
             viewHolder.mRecyclerView.setAdapter(appInfoAdapter);
-            int i = mIndexBean.getRecommendApps().size() + mIndexBean.getRecommendGames().size();
+           // int i = mIndexBean.getRecommendApps().size() + mIndexBean.getRecommendGames().size();
+
+            viewHolder.mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+                @Override
+                public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    AppInfo appInfo = appInfoAdapter.getItem(position);
+                    mAppApplication .setAppCacheView(view);
+                    Intent intent  = new Intent(mContext, AppDetailActivity.class);
+                    intent.putExtra("app_info",appInfo);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 
@@ -130,7 +153,13 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.layout_hot_app){
+          /*  mContext.startActivity(new Intent(mContext, HotAppActivity.class));*/
+        }
+        else if(v.getId() == R.id.layout_hot_subject){
 
+            mContext.startActivity(new Intent(mContext, SubjectActivity.class));
+        }
     }
 
 

@@ -26,6 +26,7 @@ public class ErrorHandler {
     }
 
     public BaseException handleError(Throwable e) {
+
         BaseException baseException = new BaseException();
 
         if (e instanceof ApiException) {
@@ -43,6 +44,7 @@ public class ErrorHandler {
         else if (e instanceof HttpException) {
             baseException.setCode(BaseException.HTTP_ERROR);
         }
+
         else {
             baseException.setCode(BaseException.UNKNOW_ERROR);
         }

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_search"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context="com.example.wen.wenplay.ui.activity.SearchActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        style="@style/AppTheme.ToolBarStyle"
+        android:title="搜索应用"
+        android:titleTextAppearance="@style/AppTheme.ToolbarTitleText"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+         <!--   <EditText
+                android:id="@+id/search_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="textNoSuggestions"
+                android:imeOptions="actionSearch"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:hint="搜索"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/white"
+                android:textColorHint="@color/background"
+                android:textSize="16sp"
+                />
+
+            <ImageView
+                android:id="@+id/action_clear_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:background="?android:attr/selectableItemBackground"/>-->
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:queryHint="搜索"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/white"
+                android:iconifiedByDefault="false"
+                app:searchHintIcon="@null"
+                android:textColorHint="@color/white"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textSize="16sp">
+
+            </android.support.v7.widget.SearchView>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/ll_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="历史记录"/>
+
+        <ImageView
+            android:id="@+id/img_clear_search_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="outsideOverlay"
+        android:clipToPadding="false"
+        android:elevation="1dp">
+    </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_suggestion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="outsideOverlay"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        android:elevation="1dp" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="outsideOverlay"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        android:elevation="1dp" />
+
+
+</LinearLayout>

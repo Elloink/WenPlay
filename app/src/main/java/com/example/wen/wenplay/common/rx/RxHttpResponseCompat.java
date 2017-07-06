@@ -28,7 +28,6 @@ public class RxHttpResponseCompat {
                 return baseBeanObservable.flatMap(new Function<BaseBean<T>, ObservableSource<T>>() {
                     @Override
                     public ObservableSource<T> apply(final BaseBean<T> tBaseBean) {
-                        Log.d("RxHttpResponseCompat",tBaseBean.toString());
                         if (tBaseBean.success()){
                             //服务器请求成功
                             return Observable.create(new ObservableOnSubscribe<T>() {
